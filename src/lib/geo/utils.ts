@@ -12,6 +12,10 @@ export const ip2long = function (ip: string) {
   } else return -1;
 };
 
+export const long2ip = (lon: number) => {
+  return [lon >>> 24, (lon >> 16) & 255, (lon >> 8) & 255, lon & 255].join('.');
+};
+
 export const inSubNet = function (ip: string, subnet: string) {
   let mask, base_ip;
   const long_ip = ip2long(ip);
@@ -22,4 +26,16 @@ export const inSubNet = function (ip: string, subnet: string) {
     const freedom = Math.pow(2, 32 - parseInt(mask[2]));
     return long_ip > base_ip && long_ip < base_ip + freedom - 1;
   } else return false;
+};
+
+export const randomIp = (range: string) => {
+  const [subnet, mask] = range.split('/');
+  const baseIp = ip2long(subnet);
+  const subnetSize = Math.pow(2, 32 - parseInt(mask));
+
+  // Exclude network address and broadcast address
+  const randomIpDecimal =
+    baseIp + Math.floor(Math.random() * (subnetSize - 2)) + 1;
+
+  return long2ip(randomIpDecimal);
 };

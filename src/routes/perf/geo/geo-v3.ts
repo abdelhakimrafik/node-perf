@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import { resolveIp } from '../../lib/geo-lib-v4';
+import { resolveIpV3 } from '../../../lib/geo';
 
-export const getCityByIp = (req: Request, res: Response) => {
+export const getCityByIpV3 = (req: Request, res: Response) => {
   const ip = req.params.ip;
 
   if (!ip) {
     throw new Error('Ip not provided');
   }
 
-  const result = resolveIp(ip);
+  const result = resolveIpV3(ip);
   if (!result) {
     res.send('Not Found');
     return;

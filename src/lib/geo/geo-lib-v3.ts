@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { inSubNet } from './utils';
 import { City, GeoResult } from './types';
 
-const db = fs.readFileSync('src/assets/db.json');
+const db = fs.readFileSync('assets/db.json');
 const citiesData: City[] = JSON.parse(db.toString());
 const cache: Record<string, GeoResult> = {};
 

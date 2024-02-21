@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import geoRouter from './geo';
+import perRouter from './perf';
+import memoRouter from './memory-leak';
 
 const routes = Router();
 
-routes.use('/geo', geoRouter);
+routes.use('/perf', perRouter);
+routes.use('/memo', memoRouter);
 
 export default routes;
